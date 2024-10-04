@@ -14,6 +14,15 @@ pipeline {
                 sh './jenkins/scripts/test.sh'
             }
         }
+        def remote = [:]
+        remote.name = 'test'
+        remote.host = '192.168.32.1'
+        remote.user = 'root'
+        remote.password = 'a478s236d159f'
+        remote.allowAnyHosts = true
+        stage('Remote SSH') {
+        sshRemove remote: remote, path: "abc.sh"
+        }
     }
 }
 
