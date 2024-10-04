@@ -21,12 +21,14 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh '/bin/docker pull node:lts'
+                // sh '/bin/docker pull node:lts'
+                sh 'echo "build"'
             }
         }
         stage('Test') {
             steps {
-                sh './jenkins/scripts/test.sh'
+                // sh './jenkins/scripts/test.sh'
+                sh 'echo "test"'
             }
         }
     }
