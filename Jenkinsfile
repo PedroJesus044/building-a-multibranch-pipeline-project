@@ -24,7 +24,7 @@ pipeline {
 
                     sh '''
 
-                    ssh -i $MY_SSH_KEY root@192.168.32.1 "ls -la"
+                    ssh -i $MY_SSH_KEY root@192.168.32.1 "docker pull node:lts"
 
                     '''
 
