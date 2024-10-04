@@ -12,7 +12,7 @@ pipeline {
     // remote.allowAnyHosts = true
 
     node {
-        sshagent (credentials: ['deploy-dev']) {
+        sshagent (credentials: ['rocky-8']) {
             sh 'ssh -o StrictHostKeyChecking=no -l cloudbees 192.168.32.1 uname -a'
         }
     }
