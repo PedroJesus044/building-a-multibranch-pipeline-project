@@ -20,7 +20,7 @@ pipeline {
             // }
             steps {
 
-                withCredentials([sshUserPrivateKey(credentialsId: 'rocky-8-key')]) {
+                withCredentials([sshUserPrivateKey(credentialsId: 'rocky-8-key', keyFileVariable: 'MY_SSH_KEY')]) {
 
                     sh '''
 
