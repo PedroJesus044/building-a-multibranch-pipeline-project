@@ -20,11 +20,11 @@ pipeline {
             // }
             steps {
 
-                withCredentials([sshUserPrivateKey(credentialsId: 'rocky-8')]) {
+                withCredentials([sshUserPrivateKey(credentialsId: 'rocky-8-key')]) {
 
                     sh '''
 
-                    ssh root@192.168.32.1 "ls -la"
+                    ssh -i $MY_SSH_KEY root@192.168.32.1 "ls -la"
 
                     '''
 
