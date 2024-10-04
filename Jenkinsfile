@@ -13,11 +13,25 @@ pipeline {
 
     stages {
         stage('SSH-test') {
+            // steps {
+            //     sshagent (credentials: ['rocky-8']) {
+            //         sh 'ssh -o StrictHostKeyChecking=no -l cloudbees 192.168.32.1 uname -a'
+            //     }
+            // }
             steps {
-                sshagent (credentials: ['rocky-8']) {
-                    sh 'ssh -o StrictHostKeyChecking=no -l cloudbees 192.168.32.1 uname -a'
+
+                withCredentials([sshUserPrivateKey(credentialsId: 'rocky-8')]) {
+
+                    sh '''
+
+                    ssh -i $MY_SSH_KEY root@192.168.32.1 "ls -la"
+
+                    '''
+
                 }
+
             }
+
         }
         stage('Build') {
             steps {
