@@ -11,13 +11,14 @@ pipeline {
     // remote.password = 'a478s236d159f'
     // remote.allowAnyHosts = true
 
-    node {
-        sshagent (credentials: ['rocky-8']) {
-            sh 'ssh -o StrictHostKeyChecking=no -l cloudbees 192.168.32.1 uname -a'
-        }
-    }
-
     stages {
+        stage('SSH-test') {
+            steps {
+                sshagent (credentials: ['rocky-8']) {
+                    sh 'ssh -o StrictHostKeyChecking=no -l cloudbees 192.168.32.1 uname -a'
+                }
+            }
+        }
         stage('Build') {
             steps {
                 sh '/bin/docker pull node:lts'
