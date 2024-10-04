@@ -4,12 +4,18 @@ pipeline {
         CI = 'true'
     }
 
-    def remote = [:]
-    remote.name = 'test'
-    remote.host = '192.168.32.1'
-    remote.user = 'root'
-    remote.password = 'a478s236d159f'
-    remote.allowAnyHosts = true
+    // def remote = [:]
+    // remote.name = 'test'
+    // remote.host = '192.168.32.1'
+    // remote.user = 'root'
+    // remote.password = 'a478s236d159f'
+    // remote.allowAnyHosts = true
+
+    node {
+        sshagent (credentials: ['deploy-dev']) {
+            sh 'ssh -o StrictHostKeyChecking=no -l cloudbees 192.168.32.1 uname -a'
+        }
+    }
 
     stages {
         stage('Build') {
@@ -21,10 +27,6 @@ pipeline {
             steps {
                 sh './jenkins/scripts/test.sh'
             }
-        }
-
-        stage('Remote SSH') {
-        sshRemove remote: remote, path: "abc.sh"
         }
     }
 }
