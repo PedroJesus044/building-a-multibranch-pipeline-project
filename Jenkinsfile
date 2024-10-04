@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'docker pull node:lts'
+                sh '/bin/docker pull node:lts'
             }
         }
         stage('Test') {
